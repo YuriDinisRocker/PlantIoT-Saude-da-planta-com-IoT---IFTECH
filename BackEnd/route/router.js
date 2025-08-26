@@ -113,4 +113,6 @@ router.post("/api/recebeDados", (req, res) => {
     ultimaLeitura=null
 });
 
+
+
 module.exports=router

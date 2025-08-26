@@ -1,7 +1,7 @@
 const express=require("express")
 const router=require("./route/router.js")
 const app=express()
-const host='localhost'
+const host='192.168.100.46'
 const port=3000
 const cors = require('cors')
 

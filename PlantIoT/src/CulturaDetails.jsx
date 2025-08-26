@@ -58,6 +58,22 @@ function CulturaDetails() {
     fetchData();
   }, [id, id_ref]);
 
+  const excluirCultura = async () => {
+    if (!window.confirm("Tem certeza que deseja excluir esta cultura?")) return;
+
+    try {
+      await api.delete("/cultura", {
+        data: { idCultura: id }
+      });
+
+      alert("Cultura excluída com sucesso!");
+      navigate("/")
+    } catch (err) {
+      console.error("Erro ao excluir cultura:", err);
+      alert("Erro ao excluir cultura.");
+    }
+  };
+
   const coletarAmostras = async () => {
     setStatusColeta('coletando');
     setError('');
@@ -222,12 +238,21 @@ function CulturaDetails() {
   return (
     <div className="min-h-screen bg-gray-50 px-4 py-8">
       <div className="max-w-6xl mx-auto">
+        <div className="flex gap-4 mb-6">
         <button 
           onClick={() => navigate(-1)}
-          className="mb-6 px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition"
+          className="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition"
         >
           Voltar
         </button>
+
+        <button 
+          onClick={excluirCultura}
+          className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition"
+        >
+          Excluir Cultura
+        </button>
+      </div>
 
         <h2 className="text-2xl font-bold text-gray-800 mb-6">Dados de Monitoramento</h2>
 
